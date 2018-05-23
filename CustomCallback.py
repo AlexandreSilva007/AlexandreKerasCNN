@@ -1,3 +1,5 @@
+import keras
+
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
     print("Go!!!!!!")
