@@ -99,20 +99,20 @@ class CNN(DeepNeuralNetwork):
         plt.imshow(img)
       plt.show()  
 
-    def dataDistribution(self):
-      print('Distribuição dos Dados')
-      objects = np.zeros(self._model.output_test.shape[1])
-      for i in range(0,self._model.output_test.shape[0]):
-        out  = np.argmax(self._model.output_test[i])
-        objects[out] += 1
-      fig=plt.figure(figsize=(10,5))
-      fig.add_subplot(1, 2, 1)
-      for i in range(0,self._model.output_test.shape[1]):
-        plt.bar(i, objects[i], 0.8)
-        plt.xlabel('Classes')
-        plt.ylabel('Elementos')
-      fig.add_subplot(1, 2, 2)
-      for i in range(0,self._model.output_test.shape[1]):
-        plt.pie(objects )
-        plt.xlabel('Classes x Elementos')
-      plt.show()
+  def dataDistribution(self):
+    print('Distribuição dos Dados')
+    objects = np.zeros(self._model.output_test.shape[1])
+    for i in range(0,self._model.output_test.shape[0]):
+      out  = np.argmax(self._model.output_test[i])
+      objects[out] += 1
+    fig=plt.figure(figsize=(10,5))
+    fig.add_subplot(1, 2, 1)
+    for i in range(0,self._model.output_test.shape[1]):
+      plt.bar(i, objects[i], 0.8)
+      plt.xlabel('Classes')
+      plt.ylabel('Elementos')
+    fig.add_subplot(1, 2, 2)
+    for i in range(0,self._model.output_test.shape[1]):
+      plt.pie(objects )
+      plt.xlabel('Classes x Elementos')
+    plt.show()
