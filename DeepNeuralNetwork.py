@@ -59,7 +59,7 @@ class DeepNeuralNetwork(CustomCallback):
 		  os.makedirs(DeepNeuralNetwork.SAVE_DIRECTORY)
 		self._model_path = os.path.join(os.getcwd(), DeepNeuralNetwork.SAVE_DIRECTORY , self._NAME)
 		self._model.save(self._model_path)
-		print('Saved trained model at %s ' % self.__model_path)
+		print('Saved trained model at %s ' % self._model_path)
 	    
 	def download(self):
 		print('Downloading trained model at %s ' % self._model_path)
