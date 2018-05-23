@@ -81,6 +81,7 @@ class CNN(DeepNeuralNetwork):
   def printImageSamples(self, img_data_array, size=(8,8),columns=8,rows=2):
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
+      print('predicted shape: ', newimg.shape)
       for j in range(0,3,1): #exibir 3 dos filtros apenas...
         fig=plt.figure(figsize=size)
         for i in range(1, columns*rows +1):
