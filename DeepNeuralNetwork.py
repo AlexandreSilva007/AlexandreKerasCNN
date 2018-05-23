@@ -46,7 +46,7 @@ class DeepNeuralNetwork(CustomCallback):
 		self._batch_step = batch_size / (self.input_train.shape[0]*0.01)
     
 	def train(self, shuffle = True, save=True, verbose=0):
-		if(not self.__configured):
+		if(not self._configured):
 		  raise ValueError('É necessário informar as funcoes de erro,otimizador,lote e épocas. Invoque configureLearning primeiro.')
 		self.history = self._model.fit(self.input_train, self.output_train, batch_size = self._batch_size, epochs = self._epochs, validation_data=(self.input_test, self.output_test), shuffle=shuffle, verbose=verbose, callbacks=[self]) 
 		if(save):
