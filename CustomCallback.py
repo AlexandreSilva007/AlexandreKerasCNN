@@ -9,11 +9,11 @@ class CustomCallback(keras.callbacks.Callback):
 
   def on_epoch_begin(self, epoch, logs = None):
     print("\rComecando época ",epoch, end=" ")
-    self.__batch_percentage_count = 0
+    self._batch_percentage_count = 0
         
   def on_batch_begin(self, batch, logs = None):
-    self.__batch_percentage_count += self.__batch_step
-    self.progressBar( int(self.__batch_percentage_count) )
+    self._batch_percentage_count += self._batch_step
+    self.progressBar( int(self._batch_percentage_count) )
   
   def on_batch_end(self, batch, logs = None):
     pass
