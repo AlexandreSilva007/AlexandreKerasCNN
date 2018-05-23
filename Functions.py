@@ -1,3 +1,6 @@
+import keras
+from keras.layers import Activation
+
 class ActivationFunction():
   def SoftMax(naxis=-1):
     return Activation('softmax')
