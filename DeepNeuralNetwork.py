@@ -9,6 +9,7 @@ from AlexandreKerasCNN.CustomCallback import CustomCallback
 class DeepNeuralNetwork(CustomCallback):
 	SAVE_DIRECTORY = 'KerasSavedModels/'
 	_configured = False
+	_flattened_data = False
  
 	def __init__(self, num_classes, name):
 		self._model = Sequential()
