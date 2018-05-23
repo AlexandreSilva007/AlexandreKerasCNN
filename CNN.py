@@ -1,15 +1,14 @@
 import os
 import matplotlib.pylab as plt
 import numpy as np
+
 import keras
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
-#from keras.models import Sequential
-#from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-#from google.colab import files
-#import matplotlib.pylab as plt
-#import numpy as np
+
+from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
+from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
 
 class CNN(DeepNeuralNetwork):
