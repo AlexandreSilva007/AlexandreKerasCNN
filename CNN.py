@@ -1,4 +1,6 @@
 import os
+import matplotlib.pylab as plt
+import numpy as np
 import keras
 from keras.datasets import cifar10
 from keras.preprocessing.image import ImageDataGenerator
