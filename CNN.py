@@ -41,7 +41,7 @@ class CNN(DeepNeuralNetwork):
     #self.input_train = np.dot(self.input_train[...,:3], [0.2125, 0.7154, 0.0721])
     #self.input_test = np.dot(self.input_test[...,:3], [0.2125, 0.7154, 0.0721])
    
-    self.printImageSamples(size=(10,10), columns=10,rows=2, img_data_array=self.input_train)
+    self.printImageSamples(size=(12,12), columns=12,rows=1, img_data_array=self.input_train)
     self.augmentInputData()
     #self.input_train = np.expand_dims(self.input_train,axis=3)
     #self.input_test = np.expand_dims(self.input_test,axis=3)
