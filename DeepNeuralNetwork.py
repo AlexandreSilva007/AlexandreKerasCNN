@@ -55,9 +55,9 @@ class DeepNeuralNetwork(CustomCallback):
 		return self.history
 		
 	def save(self):
-		if not os.path.isdir(CNN.SAVE_DIRECTORY):
-		  os.makedirs(CNN.SAVE_DIRECTORY)
-		self._model_path = os.path.join(os.getcwd(), CNN.SAVE_DIRECTORY , self._NAME)
+		if not os.path.isdir(DeepNeuralNetwork.SAVE_DIRECTORY):
+		  os.makedirs(DeepNeuralNetwork.SAVE_DIRECTORY)
+		self._model_path = os.path.join(os.getcwd(), DeepNeuralNetwork.SAVE_DIRECTORY , self._NAME)
 		self._model.save(self._model_path)
 		print('Saved trained model at %s ' % self.__model_path)
 	    
