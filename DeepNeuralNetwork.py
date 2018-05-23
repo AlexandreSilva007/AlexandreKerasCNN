@@ -4,7 +4,7 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from google.colab import files
 import matplotlib.pylab as plt
 import numpy as np
-from CustomCallback import CustomCallback
+from AlexandreKerasCNN.CustomCallback import CustomCallback
 
 class DeepNeuralNetwork(CustomCallback):
 	SAVE_DIRECTORY = 'KerasSavedModels/'
