@@ -11,8 +11,8 @@ class CustomCallback(keras.callbacks.Callback):
   def on_batch_begin(self, batch, logs = None):
     self._batch_percentage_count += self._batch_step
     n = int(self._batch_percentage_count)
-    phrase = "\rProgresso época: {} {}{} done".format("■"*n,n,'%')
-    print( phrase, end="\r")
+    sqr = "■"*n
+    print( "\rProgresso época: %s %s%s" % ("■"*n,n,'%'), end="\r")
   
   def on_batch_end(self, batch, logs = None):
     pass
