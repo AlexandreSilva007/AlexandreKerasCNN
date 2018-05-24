@@ -31,8 +31,8 @@ class CNN(DeepNeuralNetwork):
     print(self.input_train.shape[0], 'train samples')
     print(self.input_test.shape[0], 'test samples')
     #shuffle
-    self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=0)
-    self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=0)
+    #self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=0)
+    #self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=0)
     
     print('converting to binary matrices...')
     self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
