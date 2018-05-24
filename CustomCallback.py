@@ -16,7 +16,7 @@ class CustomCallback(keras.callbacks.Callback):
     self.progressBar( int(self._batch_percentage_count) )
   
   def on_batch_end(self, batch, logs = None):
-    print("\r  ",end="", flush=True)
+    print("\rProgresso época: %s %s%s done" % ("■"*100,100,'%'), end="", flush=True)
   
   def on_epoch_end(self, epoch, logs={}):
     print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
