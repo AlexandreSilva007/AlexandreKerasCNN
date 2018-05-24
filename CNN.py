@@ -13,6 +13,8 @@ from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, Optimi
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
 
+from sklearn.utils import shuffle
+
 class CNN(DeepNeuralNetwork):
   __AUGMENTATION = True
   __NUM_PREDICTIONS = 20
@@ -28,6 +30,8 @@ class CNN(DeepNeuralNetwork):
     print('out_train shape:', self.output_train.shape)
     print(self.input_train.shape[0], 'train samples')
     print(self.input_test.shape[0], 'test samples')
+    #shuffle
+    self.input_train, self.input_test, self.output_train, self.output_test = shuffle(self.input_train, self.input_test, self.output_train, self.output_test, random_state=0)
     print('converting to binary matrices...')
     self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
     self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
@@ -43,6 +47,7 @@ class CNN(DeepNeuralNetwork):
    
     self.printImageSamples(size=(12,12), columns=12,rows=1, img_data_array=self.input_train)
     self.augmentInputData()
+    
     #self.input_train = np.expand_dims(self.input_train,axis=3)
     #self.input_test = np.expand_dims(self.input_test,axis=3)
   
