@@ -80,7 +80,6 @@ class CNN(DeepNeuralNetwork):
     self._model.add(Dropout(rate))    
     
   def printImageSamples(self, img_data_array, size=(8,8),columns=8,rows=2):
-    plt.grid(False)
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
@@ -89,6 +88,7 @@ class CNN(DeepNeuralNetwork):
         for i in range(1, columns*rows +1):
           img = newimg[i]
           fig.add_subplot(rows, columns, i)
+          plt.grid(False)
           plt.imshow(img[:,:,j:(j+3)])
         plt.show()
     else:
