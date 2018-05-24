@@ -26,10 +26,9 @@ class CustomCallback(keras.callbacks.Callback):
     plt.plot(self.acc,'b')
     plt.plot(self.val_acc,'r')
     plt.xlabel('Batch')
-		plt.ylabel('Valor')
-		plt.legend(['Treino', 'Validacao'], loc='upper right')
+    plt.ylabel('Valor')
+    plt.legend(['Treino', 'Validacao'], loc='upper right')
     plt.show()
-    
-   
+       
   def on_train_end(self, logs = None):
     print("Finish!!!")
