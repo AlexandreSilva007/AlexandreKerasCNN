@@ -24,8 +24,8 @@ class CustomCallback(keras.callbacks.Callback):
   def on_epoch_end(self, epoch, logs={}):
     print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
     plt.grid(True)
-    plt.plot(self.acc,'b')
-    plt.plot(self.val_acc,'r')
+    plt.plot(self.acc)
+    plt.plot(self.val_acc)
     plt.xlabel('Batch')
     plt.ylabel('Valor')
     plt.legend(['Treino', 'Validacao'], loc='upper right')
