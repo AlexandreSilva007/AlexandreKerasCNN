@@ -80,6 +80,7 @@ class CNN(DeepNeuralNetwork):
     self._model.add(Dropout(rate))    
     
   def printImageSamples(self, img_data_array, size=(8,8),columns=8,rows=2):
+    plt.grid(False)
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
