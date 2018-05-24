@@ -1,4 +1,5 @@
 import keras
+import matplotlib.pylab as plt
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
