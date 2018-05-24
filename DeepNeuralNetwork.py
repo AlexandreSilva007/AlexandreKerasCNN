@@ -1,7 +1,7 @@
 import os
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Dense, Dropout, Activation, Flatten, BatchNormalization
 from google.colab import files
 import matplotlib.pylab as plt
 import numpy as np
@@ -38,6 +38,9 @@ class DeepNeuralNetwork(CustomCallback):
 		self._model.add(Dense(self._NUM_CLASSES))
 		self._model.add(activation_function)
     
+	def addNormalizationLayer(self):
+		self._model.add(BatchNormalization())
+
 	def configureLearning(self, loss_function, optr_function, batch_size, epochs):
 		self._model.compile(loss=loss_function, optimizer=optr_function, metrics=['accuracy'])
 		self._batch_size = batch_size
