@@ -105,6 +105,8 @@ class CNN(DeepNeuralNetwork):
           plt.imshow(x)
           if(((i*columns)+j+1) % 3 == 0):#combine filters
             x = img[:,:,(j-3):j]
+            print('j:',j)
+            print(x.shape)
             fig.add_subplot(rows, columns, (i*columns)+j+2)
             plt.grid(False)
             plt.imshow(x)
