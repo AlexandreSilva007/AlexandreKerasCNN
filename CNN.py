@@ -47,7 +47,7 @@ class CNN(DeepNeuralNetwork):
     #self.input_train = np.dot(self.input_train[...,:3], [0.2125, 0.7154, 0.0721])
     #self.input_test = np.dot(self.input_test[...,:3], [0.2125, 0.7154, 0.0721])
    
-    self.printImageSamples(size=(12,12), columns=12,rows=1, img_data_array=self.input_train)
+    self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
     self.dataDistribution()
     #self.input_train = np.expand_dims(self.input_train,axis=3)
     #self.input_test = np.expand_dims(self.input_test,axis=3)
@@ -92,6 +92,9 @@ class CNN(DeepNeuralNetwork):
     self._model.add(Dropout(rate))    
     
   def printImageSamples(self, img_data_array, size=(10,10),columns=8,rows=2):
+    if(img_data_array.shape[0] < columns*rows):
+      columns = img_data_array.shape[0]
+      rows=1
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
@@ -101,7 +104,7 @@ class CNN(DeepNeuralNetwork):
           img = newimg[i]
           fig.add_subplot(rows, columns, i)
           plt.grid(False)
-          plt.imshow(img[:,:,j:(j+3)])
+          plt.imshow(img[:,:])
         plt.show()
     else:
       fig=plt.figure(figsize=size)
