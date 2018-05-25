@@ -103,14 +103,6 @@ class CNN(DeepNeuralNetwork):
           fig.add_subplot(rows, columns, (i*columns)+j+1) #+1, subplot starts in 1
           plt.grid(False)
           plt.imshow(x)
-          if(((i*columns)+j+1) % 3 == 0 and ((i*columns)+j+2 <= columns*rows)):#combine filters
-            y = img[:,:,(j-2):(j+1)]
-            #print('j:',j)
-            print(y.shape)
-            fig.add_subplot(rows, columns, (i*columns)+j+2)
-            plt.grid(False)
-            plt.imshow(y)
-            j +=1
       plt.show()
     else:
       fig=plt.figure(figsize=size)
