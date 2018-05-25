@@ -6,12 +6,14 @@ class CustomCallback(keras.callbacks.Callback):
     print("Go!!!!!!")
     self.hist_train = []
     self.hist_test = []
+    self._epoch_percentage_count = 0
     
   def on_epoch_begin(self, epoch, logs = None):
     print("\rComecando época ",epoch, end=" ", flush=True)
     self._batch_percentage_count = 0
     self.acc = []
     self.val_acc = []
+    self._epoch_percentage_count += 1
         
   def on_batch_begin(self, batch, logs = None):
     self._batch_percentage_count += self._batch_step
@@ -27,7 +29,7 @@ class CustomCallback(keras.callbacks.Callback):
     print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
     self.hist_train.append(logs.get('val'))
     self.hist_test.append(logs.get('val_acc'))
-    if(epoch%10==0):
+    if(self._epoch_percentage_count%self._epoch_step==0):
       fig=plt.figure(figsize=(15,5))
       fig.add_subplot(1, 3, 1)
       plt.grid(True)
