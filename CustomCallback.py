@@ -28,17 +28,17 @@ class CustomCallback(keras.callbacks.Callback):
   
   def on_epoch_end(self, epoch, logs={}):
     print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
-    self.hist_train.append(logs.get('val'))
+    self.hist_train.append(logs.get('acc'))
     self.hist_test.append(logs.get('val_acc'))
     if(self._epoch_percentage_count%self._epoch_step==0):
       fig=plt.figure(figsize=(15,5))
       fig.add_subplot(1, 3, 1)
       plt.grid(True)
       plt.plot(np.arange(len(self.acc)), self.acc)
-      plt.plot(np.arange(len(self.val_acc)), self.val_acc)
+      #plt.plot(np.arange(len(self.val_acc)), self.val_acc)
       plt.xlabel('Batch')
       plt.ylabel('Valor')
-      plt.legend(['Treino', 'Validacao'], loc='upper left')
+      plt.legend(['Treino Batch'], loc='upper left')
       fig.add_subplot(1, 3, 2)
       plt.bar(1, logs.get('acc'), 0.8)
       plt.bar(2, logs.get('val_acc'), 0.8)
