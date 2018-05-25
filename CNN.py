@@ -96,13 +96,19 @@ class CNN(DeepNeuralNetwork):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
       fig=plt.figure(figsize=size)
-      for i in range(0, rows ):
+      for i in range(0, rows):
         img = newimg[i]
         for j in range(0, columns):
+          x = img[:,:,j]
           fig.add_subplot(rows, columns, (i*columns)+j+1) #+1, subplot starts in 1
           plt.grid(False)
-          x = img[:,:,j]
           plt.imshow(x)
+          if(((i*columns)+j+1) % 3 == 0):#combine filters
+            x = img[:,:,(j-3):j]
+            fig.add_subplot(rows, columns, (i*columns)+j+2)
+            plt.grid(False)
+            plt.imshow(x)
+            j +=1
       plt.show()
     else:
       fig=plt.figure(figsize=size)
