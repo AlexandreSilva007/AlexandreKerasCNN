@@ -7,7 +7,7 @@ from keras.datasets import cifar10
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.preprocessing.image import ImageDataGenerator
-from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, MinPooling2D
+from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
 
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
@@ -80,9 +80,6 @@ class CNN(DeepNeuralNetwork):
   def add2DMaxPoolingLayer(self, size):
     self._model.add(MaxPooling2D(pool_size=size))
     
-  def add2DMinPoolingLayer(self, size):
-    self._model.add(MinPooling2D(pool_size=size))
-
   def add2DAveragePoolingLayer(self, size):
     self._model.add(AveragePooling2D(pool_size=size))
     
