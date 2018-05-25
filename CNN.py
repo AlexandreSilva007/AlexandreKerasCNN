@@ -99,10 +99,11 @@ class CNN(DeepNeuralNetwork):
       for i in range(0, rows):
         img = newimg[i]
         for j in range(0, columns):
-          x = img[:,:,j]
+          x = img[:,:,j:j+3]
           fig.add_subplot(rows, columns, (i*columns)+j+1) #+1, subplot starts in 1
           plt.grid(False)
           plt.imshow(x)
+          
       plt.show()
     else:
       fig=plt.figure(figsize=size)
