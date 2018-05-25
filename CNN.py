@@ -104,12 +104,8 @@ class CNN(DeepNeuralNetwork):
           img = newimg[i]
           fig.add_subplot(rows, columns, i)
           plt.grid(False)
-          print(newimg.shape)
-          print(img.shape)
-          print('15,15,1 equivale',img[:,:,0:1])
-          x= img[:,:,0]
-          print(x.shape)
-          
+          x= img[:,:,j]
+          #x = x[:,:]
           plt.imshow(x)
         plt.show()
     else:
