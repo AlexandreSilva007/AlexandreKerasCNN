@@ -82,6 +82,9 @@ class CNN(DeepNeuralNetwork):
     
   def add2DMinPoolingLayer(self, size):
     self._model.add(MinPooling2D(pool_size=size))
+
+  def add2DAveragePoolingLayer(self, size):
+    self._model.add(AveragePooling2D(pool_size=size))
     
   def addDropoutLayer(self, rate=0.2):
     self._model.add(Dropout(rate))    
