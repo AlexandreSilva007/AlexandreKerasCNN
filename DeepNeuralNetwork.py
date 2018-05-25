@@ -47,6 +47,7 @@ class DeepNeuralNetwork(CustomCallback):
 		self._epochs = epochs
 		self._configured = True    
 		self._batch_step = batch_size / (self.input_train.shape[0]*0.1)
+		self._epoch_step = epochs / 10
 		print(self._model.summary())
     
 	def train(self, shuffle = True, save=True, verbose=0):
