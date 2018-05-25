@@ -105,7 +105,9 @@ class CNN(DeepNeuralNetwork):
           plt.imshow(x)
       plt.show()
       if(img_data_array.shape[0] > (columns*rows+columns+3)):
-        fig=plt.figure(figsize= (size[0], size[1]/rows))# 1 line
+        fig=plt.figure(figsize= (size[0], ceil(size[1]/rows)))# 1 line
+        print(fig.shape)
+        print((size[0], size[1]/rows))
         for i in range(0, columns):
           img = newimg[rows*columns+1]
           x = img[:,:,i:i+3]
