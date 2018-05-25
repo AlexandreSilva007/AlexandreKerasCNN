@@ -104,7 +104,12 @@ class CNN(DeepNeuralNetwork):
           img = newimg[i]
           fig.add_subplot(rows, columns, i)
           plt.grid(False)
-          plt.imshow( np.squeeze(img, axis=2) )
+          print(img.shape)
+          print(img)
+          x= np.squeeze(img, axis=2) 
+          print(x.shape)
+          print(x)
+          plt.imshow(x)
         plt.show()
     else:
       fig=plt.figure(figsize=size)
