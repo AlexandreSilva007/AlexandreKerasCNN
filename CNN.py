@@ -106,7 +106,7 @@ class CNN(DeepNeuralNetwork):
           plt.grid(False)
           print(newimg.shape)
           print(img.shape)
-          x= np.squeeze(img, axis=2) 
+          x= img[:,:,None]
           print(x.shape)
           print(x)
           plt.imshow(x)
