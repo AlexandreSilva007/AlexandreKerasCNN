@@ -106,9 +106,10 @@ class CNN(DeepNeuralNetwork):
           plt.grid(False)
           print(newimg.shape)
           print(img.shape)
-          x= img[:,:]
+          print(img[:,:,0:2])
+          x= img[:,:,0]
           print(x.shape)
-          print(x)
+          
           plt.imshow(x)
         plt.show()
     else:
