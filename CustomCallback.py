@@ -20,17 +20,17 @@ class CustomCallback(keras.callbacks.Callback):
     self._batch_percentage_count += self._batch_step
     self.n = int(self._batch_percentage_count)
     self.sqr = "■"*self.n
-    print( "\rProgresso época: %s %s%s" % (self.sqr,self.n*10,'%'), end="\t", flush=True)
+    print( "\rProgresso época %s: %s %s%s" % (self._epoch_percentage_count, self.sqr,self.n*10,'%'), end="\t", flush=True)
   
   def on_batch_end(self, batch, logs = None):
     self.acc.append(logs.get('acc'))
     self.val_acc.append(logs.get('val_acc'))
   
   def on_epoch_end(self, epoch, logs={}):
-    print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
     self.hist_train.append(logs.get('acc'))
     self.hist_test.append(logs.get('val_acc'))
     if(self._epoch_percentage_count%self._epoch_step==0):
+      print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
       fig=plt.figure(figsize=(15,5))
       fig.add_subplot(1, 3, 1)
       plt.grid(True)
