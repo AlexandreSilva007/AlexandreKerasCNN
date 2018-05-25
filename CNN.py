@@ -53,7 +53,7 @@ class CNN(DeepNeuralNetwork):
     #self.input_test = np.expand_dims(self.input_test,axis=3)
   
   def configureLearning(self, loss_function, optr_function, batch_size, epochs, augment_data=True):
-    super(CNN,self).configureLearning(self, loss_function, optr_function, batch_size, epochs)
+    super(CNN,self).configureLearning(loss_function, optr_function, batch_size, epochs)
     if(augment_data):
       self.augmentInputData()
   
@@ -64,7 +64,7 @@ class CNN(DeepNeuralNetwork):
         featurewise_std_normalization=False,  # divide inputs by std of the dataset
         samplewise_std_normalization=False,  # divide each input by its std
         zca_whitening=True,  # apply ZCA whitening
-        rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
+        rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
         width_shift_range=0,  # randomly shift images horizontally (fraction of total width)
         height_shift_range=0,  # randomly shift images vertically (fraction of total height)
         horizontal_flip=True,  # randomly flip images
