@@ -4,7 +4,6 @@ import numpy as np
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
-    print("Go!!!!!!")
     self.hist_train = []
     self.hist_test = []
     self._epoch_percentage_count = 0
