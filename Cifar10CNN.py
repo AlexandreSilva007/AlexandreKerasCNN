@@ -11,8 +11,9 @@ from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
+from AlexandreKerasCNN.CNN import CNN
 
-class Cifar10CNN:
+class Cifar10CNN(CNN):
 	def __init__(self, num_classes, name):
 		super(Cifar10CNN, self).__init__(num_classes, name)
 		
