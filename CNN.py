@@ -106,7 +106,7 @@ class CNN(DeepNeuralNetwork):
           plt.grid(False)
           print(newimg.shape)
           print(img.shape)
-          print(img[:,:,0:2])
+          print('15,15,1 equivale',img[:,:,0:1])
           x= img[:,:,0]
           print(x.shape)
           
