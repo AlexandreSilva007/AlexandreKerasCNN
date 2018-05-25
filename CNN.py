@@ -48,10 +48,14 @@ class CNN(DeepNeuralNetwork):
     #self.input_test = np.dot(self.input_test[...,:3], [0.2125, 0.7154, 0.0721])
    
     self.printImageSamples(size=(12,12), columns=12,rows=1, img_data_array=self.input_train)
-    self.augmentInputData()
-    
+    self.dataDistribution()
     #self.input_train = np.expand_dims(self.input_train,axis=3)
     #self.input_test = np.expand_dims(self.input_test,axis=3)
+  
+  def configureLearning(self, loss_function, optr_function, batch_size, epochs, augment_data=True):
+    super(CNN,self).configureLearning(self, loss_function, optr_function, batch_size, epochs)
+    if(augment_data):
+      self.augmentInputData()
   
   def augmentInputData(self):
     datagen = ImageDataGenerator(
@@ -59,16 +63,17 @@ class CNN(DeepNeuralNetwork):
         samplewise_center=False,  # set each sample mean to 0
         featurewise_std_normalization=False,  # divide inputs by std of the dataset
         samplewise_std_normalization=False,  # divide each input by its std
-        zca_whitening=False,  # apply ZCA whitening
-        rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
-        width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-        height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+        zca_whitening=True,  # apply ZCA whitening
+        rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
+        width_shift_range=0,  # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0,  # randomly shift images vertically (fraction of total height)
         horizontal_flip=True,  # randomly flip images
         vertical_flip=False)  # randomly flip images
     # Compute quantities required for feature-wise normalization
     # (std, mean, and principal components if ZCA whitening is applied).
     datagen.fit(self.input_train)
-    self.dataDistribution()
+    # fits the model on batches with real-time data augmentation:
+    self._model.fit_generator(datagen.flow(self.input_train, self.output_train, self._batch_size), steps_per_epoch=len(self.input_train) / self._batch_size, epochs=self._epochs)
   
   #number of filters (int), kernel object, input shape = shape
   def add2DConvolutionLayer(self, num_kernels, kernel):
@@ -86,7 +91,7 @@ class CNN(DeepNeuralNetwork):
   def addDropoutLayer(self, rate=0.2):
     self._model.add(Dropout(rate))    
     
-  def printImageSamples(self, img_data_array, size=(8,8),columns=8,rows=2):
+  def printImageSamples(self, img_data_array, size=(10,10),columns=8,rows=2):
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
