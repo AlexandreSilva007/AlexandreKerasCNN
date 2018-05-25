@@ -91,23 +91,19 @@ class CNN(DeepNeuralNetwork):
   def addDropoutLayer(self, rate=0.2):
     self._model.add(Dropout(rate))    
     
-  def printImageSamples(self, img_data_array, size=(10,10),columns=8,rows=2):
-    if(img_data_array.shape[0] < columns*rows):
-      columns = img_data_array.shape[0]
-      rows=1
+  def printImageSamples(self, img_data_array, size=(10,5),columns=8,rows=4):
     if(len(self._model.layers)>0):
       newimg = self._model.predict(img_data_array)
       print('predicted shape: ', newimg.shape)
-      for j in range(0,3,1): #exibir 3 dos filtros apenas...
-        fig=plt.figure(figsize=size)
-        for i in range(1, columns*rows +1):
-          img = newimg[i]
-          fig.add_subplot(rows, columns, i)
+      fig=plt.figure(figsize=size)
+      for i in range(0, rows ):
+        img = newimg[i]
+        for j in range(0, columns):
+          fig.add_subplot(rows, columns, (i*columns)+j+1) #+1, subplot starts in 1
           plt.grid(False)
-          x= img[:,:,j]
-          #x = x[:,:]
+          x = img[:,:,j]
           plt.imshow(x)
-        plt.show()
+      plt.show()
     else:
       fig=plt.figure(figsize=size)
       newimg = img_data_array
