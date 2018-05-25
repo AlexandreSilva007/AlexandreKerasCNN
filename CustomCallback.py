@@ -23,13 +23,20 @@ class CustomCallback(keras.callbacks.Callback):
   
   def on_epoch_end(self, epoch, logs={}):
     print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
+    fig=plt.figure(figsize=(10,5))
+    fig.add_subplot(1, 2, 1)
     plt.grid(True)
     plt.plot(self.acc)
     plt.plot(self.val_acc)
     plt.xlabel('Batch')
     plt.ylabel('Valor')
-    plt.legend(['Treino', 'Validacao'], loc='upper right')
+    plt.legend(['Treino', 'Validacao'], loc='upper left')
+    fig.add_subplot(1, 2, 2)
+    plt.bar(1, (logs.get('acc'),logs.get('val_acc'),logs.get('loss')), 0.8)
+    plt.xlabel('Elementos')
+    plt.ylabel('Precisao')
+    plt.legend(['Treino', 'Validacao','Erro'], loc='upper left')
     plt.show()
-       
+    
   def on_train_end(self, logs = None):
     print("Finish!!!")
