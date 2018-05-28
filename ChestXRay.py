@@ -65,8 +65,8 @@ class ChestXRay(CNN):
 		print('Test: ', self.input_test.shape)
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
-		self.input_train /= 255
-		self.input_test /= 255
+		#self.input_train /= 255
+		#self.input_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
