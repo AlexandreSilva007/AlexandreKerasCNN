@@ -30,25 +30,27 @@ class ChestXRay(CNN):
 		super(ChestXRay, self).__init__(num_classes, name)
 		
 	def downloadDriveZip(self, local_download_path, drive_file, file_name):
-	  # 1. Authenticate and create the PyDrive client.
-	  auth.authenticate_user()
-	  gauth = GoogleAuth()
-	  gauth.credentials = GoogleCredentials.get_application_default()
-	  drive = GoogleDrive(gauth)
-	  os.makedirs(local_download_path)
-	  fname = os.path.join(local_download_path, file_name)
-	  if(os.path.isfile(fname)):
-		print('skipping, file already exists', end="")
-	  else:
-		fileId = drive.CreateFile({'id': drive_file}) #DRIVE_FILE_ID is file id example: 1iytA1n2z4go3uVCwE_vIKouTKyIDjEq
-		print('filename: ',fileId['title'])
-		fileId.GetContentFile(fileId['title'])
-		print(fileId)
-		print("wait..extracting...")
-		zip_ref = zipfile.ZipFile(fileId['title'], 'r')
-		zip_ref.extractall(local_download_path)
-		zip_ref.close()
-		print('Xtracted to: ',local_download_path)
+		# 1. Authenticate and create the PyDrive client.
+		auth.authenticate_user()
+		gauth = GoogleAuth()
+		gauth.credentials = GoogleCredentials.get_application_default()
+		drive = GoogleDrive(gauth)
+		try:
+			os.makedirs(local_download_path)
+		except: pass
+		fname = os.path.join(local_download_path, file_name)
+		if(os.path.isfile(fname)):
+			print('skipping, file already exists', end="")
+		else:
+			fileId = drive.CreateFile({'id': drive_file}) #DRIVE_FILE_ID is file id example: 1iytA1n2z4go3uVCwE_vIKouTKyIDjEq
+			print('filename: ',fileId['title'])
+			fileId.GetContentFile(fileId['title'])
+			print(fileId)
+			print("wait..extracting...")
+			zip_ref = zipfile.ZipFile(fileId['title'], 'r')
+			zip_ref.extractall(local_download_path)
+			zip_ref.close()
+			print('Xtracted to: ',local_download_path)
 
 	def loadChestXRayFromDrive(self):
 		local_download_path = os.path.join(os.getcwd())
@@ -71,11 +73,6 @@ class ChestXRay(CNN):
 		self.input_test /= 255
 	  	self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
-		
-
-
-		
-		
 		
 	def get_data(folder):
 		X = []
