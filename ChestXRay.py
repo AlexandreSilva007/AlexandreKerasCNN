@@ -37,7 +37,8 @@ class ChestXRay(CNN):
 	  drive = GoogleDrive(gauth)
 	  try:
 		os.makedirs(local_download_path)
-	  except: pass
+	  except: 
+		pass
 	  fname = os.path.join(local_download_path, file_name)
 	  if(os.path.isfile(fname)):
 		 print('skipping, file already exists', end="")
