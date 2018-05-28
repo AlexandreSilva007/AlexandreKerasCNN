@@ -35,13 +35,10 @@ class ChestXRay(CNN):
 	  gauth = GoogleAuth()
 	  gauth.credentials = GoogleCredentials.get_application_default()
 	  drive = GoogleDrive(gauth)
-	  try:
-		os.makedirs(local_download_path)
-	  except: 
-		pass
+	  os.makedirs(local_download_path)
 	  fname = os.path.join(local_download_path, file_name)
 	  if(os.path.isfile(fname)):
-		 print('skipping, file already exists', end="")
+		print('skipping, file already exists', end="")
 	  else:
 		fileId = drive.CreateFile({'id': drive_file}) #DRIVE_FILE_ID is file id example: 1iytA1n2z4go3uVCwE_vIKouTKyIDjEq
 		print('filename: ',fileId['title'])
