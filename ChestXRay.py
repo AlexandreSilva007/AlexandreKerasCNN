@@ -57,21 +57,17 @@ class ChestXRay(CNN):
 		drive_file = '1BMdv-PRDZwI91IVdHsNFuNbKX2AgDGa6'
 		file_name = 'chest_xray.zip'
 		self.downloadDriveZip(local_download_path, drive_file, file_name)
-		
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
-
 		self.output_train = to_categorical(self.output_train, num_classes = 2)
 		self.output_test = to_categorical(self.output_test, num_classes = 2)
 		print('Train: ', self.input_train.shape)
 		print('Test: ', self.input_test.shape)
-		
-
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
 		self.input_train /= 255
 		self.input_test /= 255
-	  	self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
+		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
 	def get_data(folder):
