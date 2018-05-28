@@ -58,7 +58,7 @@ class CNN(DeepNeuralNetwork):
   def addDropoutLayer(self, rate=0.2):
     self._model.add(Dropout(rate))    
     
-  def addCropLayer(topleft=(0,0), bottomright=(0,0):
+  def addCropLayer(topleft=(0,0), bottomright=(0,0)):
     self._model.keras.layers.Cropping2D(cropping=(topleft, bottomright))
     
   def printImageSamples(self, img_data_array, size=(10,5),columns=8,rows=4):
