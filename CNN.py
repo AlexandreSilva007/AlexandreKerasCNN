@@ -6,7 +6,7 @@ from keras.datasets import cifar10
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.preprocessing.image import ImageDataGenerator
-from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
+from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, Cropping2D
 
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
@@ -59,7 +59,7 @@ class CNN(DeepNeuralNetwork):
     self._model.add(Dropout(rate))    
     
   def addCropLayer(self, top=0,left=0, bottom=0, right=0):
-    self._model.keras.layers.Cropping2D(cropping=((top,left), (bottom,right)))
+    self._model.add(Cropping2D(cropping=((top,left), (bottom,right))))
     
   def printImageSamples(self, img_data_array, size=(10,5),columns=8,rows=4):
     if(len(self._model.layers)>0):
