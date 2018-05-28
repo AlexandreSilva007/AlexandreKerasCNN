@@ -70,7 +70,7 @@ class ChestXRay(CNN):
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
-	def get_data(folder):
+	def get_data(self,folder):
 		X = []
 		y = []
 		for folderName in os.listdir(folder):
@@ -83,16 +83,16 @@ class ChestXRay(CNN):
 					label = 2
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
-					  img_file = Image.open(folder + folderName + '/' + image_filename).convert("RGB")
-					  img_file.load()
-					  img_file = np.asarray(img_file)
-					  if img_file is not None:
-						  img_file = skimage.transform.resize(img_file, (150, 150, 3))
-						  img_arr = np.asarray(img_file)
-						  X.append(img_arr)
-						  y.append(label)
-					  else:
-						print('ops')
+						img_file = Image.open(folder + folderName + '/' + image_filename).convert("RGB")
+						img_file.load()
+						img_file = np.asarray(img_file)
+						if img_file is not None:
+							img_file = skimage.transform.resize(img_file, (150, 150, 3))
+							img_arr = np.asarray(img_file)
+							X.append(img_arr)
+							y.append(label)
+						else:
+							print('ops')
 		X = np.asarray(X)
 		y = np.asarray(y)
 		return X,y
