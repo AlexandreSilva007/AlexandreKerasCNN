@@ -1,6 +1,7 @@
 import keras
 import matplotlib.pylab as plt
 import numpy as np
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
