@@ -86,6 +86,7 @@ class ChestXRay(CNN):
 						img_file = Image.open(folder + folderName + '/' + image_filename).convert("RGB")
 						img_file.load()
 						img_file = np.asarray(img_file)
+						img_file /= 255
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
 							img_file = img_file[7:163,17:133]#.crop((7, 12, 163, 138)) #crop
