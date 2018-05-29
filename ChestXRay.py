@@ -60,7 +60,6 @@ class ChestXRay(CNN):
 		self.downloadDriveZip(local_download_path, drive_file, file_name)
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
-		print(self.output_test)
 		
 		(self.input_train, self.output_train) = shuffle(self.input_train, self.output_train, random_state=0)
 		(self.input_test, self.output_test) = shuffle(self.input_test, self.output_test, random_state=0)
@@ -86,10 +85,8 @@ class ChestXRay(CNN):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
 					label = 0
-					print('Normal')
 				elif folderName in ['PNEUMONIA']:
 					label = 1
-					print('Pneumonia')
 				else:
 					label = 2
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
@@ -103,6 +100,7 @@ class ChestXRay(CNN):
 							#img_arr = np.asarray(img_file)
 							X.append(img_file)
 							y.append(label)
+							print(label)
 						else:
 							print('ops')
 		X = np.asarray(X)
