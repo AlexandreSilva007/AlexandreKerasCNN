@@ -59,6 +59,8 @@ class ChestXRay(CNN):
 		self.downloadDriveZip(local_download_path, drive_file, file_name)
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
+		
+		self.y_true = self.output_train
 		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
 		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
 		print('Train: ', self.input_train.shape)
