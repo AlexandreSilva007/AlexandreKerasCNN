@@ -60,6 +60,10 @@ class ChestXRay(CNN):
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
 		print(self.output_test)
+		
+		(self.input_train, self.output_train) = sklearn.utils.shuffle(self.input_train, self.output_train, random_state=0)
+		(self.input_test, self.output_test) = sklearn.utils.shuffle(self.input_test, self.output_test, random_state=0)
+		
 		self.ySingle = self.output_test
 		#self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
 		#self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
