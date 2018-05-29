@@ -61,8 +61,8 @@ class ChestXRay(CNN):
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
 		
 		self.ySingle = self.output_test
-		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
-		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
+		#self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
+		#self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
 		print('Train: ', self.input_train.shape)
 		print('Test: ', self.input_test.shape)
 		self.input_train = self.input_train.astype('float32')
