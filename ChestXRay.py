@@ -67,6 +67,8 @@ class ChestXRay(CNN):
 		self.input_test = self.input_test.astype('float32')
 		self.input_train /= 255
 		self.input_test /= 255
+		self.input_test /= 255
+		self.output_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
@@ -76,9 +78,9 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 0
+					label = 0.0
 				elif folderName in ['PNEUMONIA']:
-					label = 1
+					label = 1.0
 				else:
 					label = 2
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
@@ -88,7 +90,7 @@ class ChestXRay(CNN):
 						img_file = np.asarray(img_file)
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
-							img_file = img_file[7:163,17:133]#.crop((7, 12, 163, 138)) #crop
+							img_file = img_file[7:160,17:130]#.crop((7, 12, 163, 138)) #crop
 							#img_arr = np.asarray(img_file)
 							X.append(img_file)
 							y.append(label)
