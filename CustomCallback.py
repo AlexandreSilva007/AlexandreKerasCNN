@@ -42,7 +42,7 @@ class CustomCallback(keras.callbacks.Callback):
     self.val_f1s.append(_val_f1)
     self.val_recalls.append(_val_recall)
     self.val_precisions.append(_val_precision)
-    print (" — val_f1: %s — val_precision: %s — val_recall %s" %(_val_f1, _val_precision, _val_recall))
+    print ("\r — val_f1: %s — val_precision: %s — val_recall %s" %(_val_f1, _val_precision, _val_recall), end="")
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
@@ -72,3 +72,6 @@ class CustomCallback(keras.callbacks.Callback):
     
   def on_train_end(self, logs = None):
     print("Finish!!!")
+    print('F1s: ',self.val_f1s)
+    print('Recalls: ',self.val_recalls)
+    print('Precisions: ',self.val_precisions)
