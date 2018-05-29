@@ -72,7 +72,7 @@ class ChestXRay(CNN):
 		#self.input_test /= 255
 		#self.output_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
-		self.dataDistribution()
+		#self.dataDistribution()
 		
 	def get_data(self,folder):
 		X = []
