@@ -8,6 +8,10 @@ class CustomCallback(keras.callbacks.Callback):
     self.hist_test = []
     self._epoch_percentage_count = 0
     
+    self.val_f1s = []
+    self.val_recalls = []
+    self.val_precisions = []
+    
   def on_epoch_begin(self, epoch, logs = None):
     print("\rComecando época ",epoch, end=" ", flush=True)
     self._batch_percentage_count = 0
@@ -28,6 +32,17 @@ class CustomCallback(keras.callbacks.Callback):
   def on_epoch_end(self, epoch, logs={}):
     self.hist_train.append(logs.get('acc'))
     self.hist_test.append(logs.get('val_acc'))
+    
+    val_predict = (np.asarray(self.model.predict(self.model.validation_data[0]))).round()
+    val_targ = self.model.validation_data[1]
+    _val_f1 = f1_score(val_targ, val_predict)
+    _val_recall = recall_score(val_targ, val_predict)
+    _val_precision = precision_score(val_targ, val_predict)
+    self.val_f1s.append(_val_f1)
+    self.val_recalls.append(_val_recall)
+    self.val_precisions.append(_val_precision)
+    print (" — val_f1: %f — val_precision: %f — val_recall %f" %(_val_f1, _val_precision, _val_recall))
+        
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
       fig=plt.figure(figsize=(15,5))
