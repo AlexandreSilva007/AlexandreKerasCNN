@@ -59,8 +59,8 @@ class ChestXRay(CNN):
 		self.downloadDriveZip(local_download_path, drive_file, file_name)
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
-		self.output_train = to_categorical(self.output_train, num_classes = 2)
-		self.output_test = to_categorical(self.output_test, num_classes = 2)
+		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
+		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
 		print('Train: ', self.input_train.shape)
 		print('Test: ', self.input_test.shape)
 		self.input_train = self.input_train.astype('float32')
@@ -121,8 +121,8 @@ class ChestXRay(CNN):
 			samplewise_center=False,  # set each sample mean to 0
 			featurewise_std_normalization=False,  # divide inputs by std of the dataset
 			samplewise_std_normalization=False,  # divide each input by its std
-			zca_whitening=True,  # apply ZCA whitening
-			rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
+			zca_whitening=False,  # apply ZCA whitening
+			rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
 			width_shift_range=0,  # randomly shift images horizontally (fraction of total width)
 			height_shift_range=0,  # randomly shift images vertically (fraction of total height)
 			horizontal_flip=True,  # randomly flip images
