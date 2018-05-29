@@ -36,9 +36,9 @@ class CustomCallback(keras.callbacks.Callback):
     
     val_predict = (np.asarray(self._model.predict(self.input_test))).round()
     val_targ = self.output_test
-    _val_f1 = f1_score(val_targ, val_predict)
-    _val_recall = recall_score(val_targ, val_predict)
-    _val_precision = precision_score(val_targ, val_predict)
+    _val_f1 = f1_score(val_targ, val_predict, average=None)
+    _val_recall = recall_score(val_targ, val_predict, average=None)
+    _val_precision = precision_score(val_targ, val_predict, average=None)
     self.val_f1s.append(_val_f1)
     self.val_recalls.append(_val_recall)
     self.val_precisions.append(_val_precision)
