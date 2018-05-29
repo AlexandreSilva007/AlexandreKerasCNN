@@ -85,9 +85,11 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 0.0
+					label = 0
+					print('Normal')
 				elif folderName in ['PNEUMONIA']:
-					label = 1.0
+					label = 1
+					print('Pneumonia')
 				else:
 					label = 2
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
