@@ -65,10 +65,10 @@ class ChestXRay(CNN):
 		print('Test: ', self.input_test.shape)
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
-		self.input_train /= 255
-		self.input_test /= 255
-		self.input_test /= 255
-		self.output_test /= 255
+		#self.input_train /= 255
+		#self.input_test /= 255
+		#self.input_test /= 255
+		#self.output_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
@@ -124,7 +124,7 @@ class ChestXRay(CNN):
 			samplewise_center=False,  # set each sample mean to 0
 			featurewise_std_normalization=False,  # divide inputs by std of the dataset
 			samplewise_std_normalization=False,  # divide each input by its std
-			zca_whitening=True,  # apply ZCA whitening
+			zca_whitening=False,  # apply ZCA whitening
 			rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
 			width_shift_range=0,  # randomly shift images horizontally (fraction of total width)
 			height_shift_range=0,  # randomly shift images vertically (fraction of total height)
