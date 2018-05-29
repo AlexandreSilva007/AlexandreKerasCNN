@@ -65,8 +65,8 @@ class ChestXRay(CNN):
 		print('Test: ', self.input_test.shape)
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
-		#self.input_train /= 255
-		#self.input_test /= 255
+		self.input_train /= 255
+		self.input_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
 		
@@ -86,7 +86,6 @@ class ChestXRay(CNN):
 						img_file = Image.open(folder + folderName + '/' + image_filename).convert("RGB")
 						img_file.load()
 						img_file = np.asarray(img_file)
-						img_file /= 255
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
 							img_file = img_file[7:163,17:133]#.crop((7, 12, 163, 138)) #crop
