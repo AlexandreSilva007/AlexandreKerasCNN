@@ -34,7 +34,8 @@ class CustomCallback(keras.callbacks.Callback):
     self.hist_train.append(logs.get('acc'))
     self.hist_test.append(logs.get('val_acc'))
     
-    val_predict = (np.asarray(self._model.predict(self.input_test))).round()
+    val_predict = (np.asarray(self._model.predict(self.input_test)))
+    val_predict = (val_predict>self._NUM_CLASSES).astype(int)
     print(val_predict.shape)
     print('PREV: ',val_predict)
     val_targ = self.output_test
