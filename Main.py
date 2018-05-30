@@ -11,12 +11,12 @@ import time
 import numpy as np
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
-from AlexandreKerasCNN.CNN import CNN
+from AlexandreKerasCNN.Cifar10CNN import Cifar10CNN
 #salva um modelo a cada treinamento
 name = 'KerasCNNModel_' +  str(time.time()).replace('.','') + '.h5'
 
 #Carrega Dados
-modelo = CNN(num_classes=10, name=name )
+modelo = Cifar10CNN(num_classes=10, name=name )
 modelo.loadCIFAR10Data()
 
 #Camada Convolucional + MaxPooling 
