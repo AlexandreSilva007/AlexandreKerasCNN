@@ -85,13 +85,13 @@ class ChestXRay(CNN):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
 					label = 0
-				elif folderName in ['PNEUMONIA']:
+				else folderName in ['PNEUMONIA']:
 					label = 1
-				else:
-					label = 2
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
-						img_file = Image.open(folder + folderName + '/' + image_filename).convert("RGB")
+						fpath = folder + folderName + '/' + image_filename
+						print('\rLoading File: ', fpath, end="")
+						img_file = Image.open(fpath).convert("RGB")
 						img_file.load()
 						img_file = np.asarray(img_file)
 						if img_file is not None:
@@ -100,7 +100,6 @@ class ChestXRay(CNN):
 							#img_arr = np.asarray(img_file)
 							X.append(img_file)
 							y.append(label)
-							print(label)
 						else:
 							print('ops')
 		X = np.asarray(X)
