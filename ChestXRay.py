@@ -63,12 +63,11 @@ class ChestXRay(CNN):
 		
 		print('shape input', self.input_train.shape)
 		print('shape output: ', self.output_train.shape)
-		
-		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
-		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
-
 		self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=1)
 		self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=1)
+		
+		self.output_train = self.convertYVector2BinaryMatrix( self.output_train.expand(axis=1) )
+		self.output_test = self.convertYVector2BinaryMatrix(self.output_test.expand(axis=1) )
 
 		print('Input Train: ', self.input_train.shape)
 		print('Input Test: ', self.input_test.shape)
