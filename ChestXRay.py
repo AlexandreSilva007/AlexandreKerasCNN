@@ -64,9 +64,9 @@ class ChestXRay(CNN):
 		(self.input_train, self.output_train) = shuffle(self.input_train, self.output_train, random_state=0)
 		(self.input_test, self.output_test) = shuffle(self.input_test, self.output_test, random_state=0)
 		
-		self.ySingle = self.output_test
 		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
 		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
+		
 		print('Input Train: ', self.input_train.shape)
 		print('Input Test: ', self.input_test.shape)
 		print('Out Train: ', self.output_train.shape)
@@ -78,7 +78,7 @@ class ChestXRay(CNN):
 		#self.input_test /= 255
 		#self.output_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
-		#self.dataDistribution()
+		self.dataDistribution()
 		
 	def get_data(self,folder):
 		X = []
@@ -86,9 +86,12 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 0.0
-				else:# folderName in ['PNEUMONIA']:
-					label = 1.0
+					label = 0
+				elif folderName in ['PNEUMONIA']:
+					label = 1
+				else:
+					print('past nao esperada')
+					continue
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
@@ -99,8 +102,8 @@ class ChestXRay(CNN):
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
 							img_file = img_file[7:160,17:130]#.crop((7, 12, 163, 138)) #crop
-							#img_arr = np.asarray(img_file)
-							X.append(img_file)
+							img_arr = np.asarray(img_file)
+							X.append(img_arr)
 							y.append(label)
 						else:
 							print('ops')
