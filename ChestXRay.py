@@ -86,12 +86,12 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 1
-				elif folderName in ['PNEUMONIA']:
 					label = 2
+				elif folderName in ['PNEUMONIA']:
+					label = 1
 				else:
+					label = 2
 					print('past nao esperada')
-					continue
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
