@@ -71,8 +71,9 @@ class ChestXRay(CNN):
 		print('Input Test: ', self.input_test.shape)
 		print('Out Train: ', self.output_train.shape)
 		print('Out Test: ', self.output_test.shape)
-		self.input_train = self.input_train.astype('float32')
-		self.input_test = self.input_test.astype('float32')
+		print(self.input_train[0])
+		#self.input_train = self.input_train.astype('float32')
+		#self.input_test = self.input_test.astype('float32')
 		#self.input_train /= 255
 		#self.input_test /= 255
 		#self.input_test /= 255
