@@ -70,8 +70,8 @@ class ChestXRay(CNN):
 		self.output_test = np.expand_dims(self.output_test, axis=1)
 		print('new out shape: ', self.output_train.shape)
 		
-		self.output_train = self.convertYVector2BinaryMatrix( self.output_train )
-		self.output_test = self.convertYVector2BinaryMatrix(self.output_test )
+		#self.output_train = self.convertYVector2BinaryMatrix( self.output_train )
+		#self.output_test = self.convertYVector2BinaryMatrix(self.output_test )
 
 		print('Input Train: ', self.input_train.shape)
 		print('Input Test: ', self.input_test.shape)
@@ -93,9 +93,9 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 2
+					label = [0,1]
 				elif folderName in ['PNEUMONIA']:
-					label = 1
+					label = [1,0]
 				else:
 					label = 2
 					print('past nao esperada')
