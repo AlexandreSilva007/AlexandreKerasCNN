@@ -61,8 +61,8 @@ class ChestXRay(CNN):
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
 		
-		(self.input_train, self.output_train) = shuffle(self.input_train, self.output_train, random_state=0)
-		(self.input_test, self.output_test) = shuffle(self.input_test, self.output_test, random_state=0)
+		#(self.input_train, self.output_train) = shuffle(self.input_train, self.output_train, random_state=0)
+		#(self.input_test, self.output_test) = shuffle(self.input_test, self.output_test, random_state=0)
 		
 		self.output_train = self.convertYVector2BinaryMatrix(self.output_train)
 		self.output_test = self.convertYVector2BinaryMatrix(self.output_test)
@@ -102,8 +102,7 @@ class ChestXRay(CNN):
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
 							img_file = img_file[7:160,17:130]#.crop((7, 12, 163, 138)) #crop
-							img_arr = np.asarray(img_file)
-							X.append(img_arr)
+							X.append(img_file)
 							y.append(label)
 						else:
 							print('ops')
