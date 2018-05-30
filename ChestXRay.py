@@ -68,7 +68,7 @@ class ChestXRay(CNN):
 		
 		self.output_train = np.expand_dims(self.output_train, axis=1)
 		self.output_test = np.expand_dims(self.output_test, axis=1)
-		print('new out shape ', self.output_shape.shape)
+		print('new out shape ', self.output_train.shape)
 		
 		self.output_train = self.convertYVector2BinaryMatrix( self.output_train.expand(axis=1) )
 		self.output_test = self.convertYVector2BinaryMatrix(self.output_test.expand(axis=1) )
