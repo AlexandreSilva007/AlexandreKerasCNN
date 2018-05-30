@@ -34,12 +34,11 @@ class CustomCallback(keras.callbacks.Callback):
     self.hist_test.append(logs.get('val_acc'))
     
     val_predict = (np.asarray(self._model.predict(self.input_test))).round()
-    #val_predict = (val_predict>self._NUM_CLASSES).astype(int)
-    print(val_predict.shape)
-    print('PREV: ',val_predict)
+    #print(val_predict.shape)
+    #print('PREV: ',val_predict)
     val_targ = self.output_test
-    print(val_targ.shape)
-    print('TEST: ',val_targ)
+    #print(val_targ.shape)
+    #print('TEST: ',val_targ)
     _val_f1 = f1_score(val_targ, val_predict, average=None)
     _val_recall = recall_score(val_targ, val_predict,average=None)
     _val_precision = precision_score(val_targ, val_predict,average=None)
