@@ -107,7 +107,7 @@ class ChestXRay(CNN):
 						img_file = np.asarray(img_file)
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
-							img_file = img_file[1:150,20:145]#.crop((7, 12, 163, 138)) #crop
+							img_file = img_file[15:135,30:120]#.crop((7, 12, 163, 138)) #crop
 							X.append(img_file)
 							y.append(label)
 						else:
