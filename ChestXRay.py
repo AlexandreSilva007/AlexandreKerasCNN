@@ -46,8 +46,8 @@ class ChestXRay(CNN):
 			fileId = drive.CreateFile({'id': drive_file}) #DRIVE_FILE_ID is file id example: 1iytA1n2z4go3uVCwE_vIKouTKyIDjEq
 			print('filename: ',fileId['title'])
 			fileId.GetContentFile(fileId['title'])
-			print(fileId)
-			print("wait..extracting...")
+			#print(fileId)
+			print("wait..extracting zip...")
 			zip_ref = zipfile.ZipFile(fileId['title'], 'r')
 			zip_ref.extractall(local_download_path)
 			zip_ref.close()
