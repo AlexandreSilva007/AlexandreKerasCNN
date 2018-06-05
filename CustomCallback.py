@@ -34,18 +34,20 @@ class CustomCallback(keras.callbacks.Callback):
     self.hist_test.append(logs.get('val_acc'))
     
     val_predict = (np.asarray(self._model.predict(self.input_test))).round()
-    #print(val_predict.shape)
-    #print('PREV: ',val_predict)
     val_targ = self.output_test
-    #print(val_targ.shape)
-    #print('TEST: ',val_targ)
+
     _val_f1 = f1_score(val_targ, val_predict, average=None)
     _val_recall = recall_score(val_targ, val_predict,average=None)
     _val_precision = precision_score(val_targ, val_predict,average=None)
     self.val_f1s.append(_val_f1)
     self.val_recalls.append(_val_recall)
     self.val_precisions.append(_val_precision)
-    print ("\r val_f1: %s val_precision: %s val_recall %s" %(_val_f1, _val_precision, _val_recall))
+    #print ("\r val_f1: %s val_precision: %s val_recall %s" %(_val_f1, _val_precision, _val_recall))
+    print ("\r f1_score: %s" % (_val_f1))
+    
+    #confusion matrix
+    cm = confusion_matrix(val_targ, val_predict, labels=None)
+    CustomCallback.plot_confusion_matrix(cm, self._NUM_CLASSES)
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
@@ -78,3 +80,26 @@ class CustomCallback(keras.callbacks.Callback):
     print('F1s: ',self.val_f1s)
     print('Recalls: ',self.val_recalls)
     print('Precisions: ',self.val_precisions)
+    
+  def plot_confusion_matrix(cm, classes, normalize=False, title='Matriz de Confusão', cmap=plt.cm.Blues):
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Matriz de Confusão Normalizada")
+    else:
+        print('Matriz de Confusão, sem normalização')
+    print(cm)
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
