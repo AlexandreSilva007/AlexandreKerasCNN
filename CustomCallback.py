@@ -45,14 +45,14 @@ class CustomCallback(keras.callbacks.Callback):
     #print ("\r val_f1: %s val_precision: %s val_recall %s" %(_val_f1, _val_precision, _val_recall))
     print ("\r f1_score: %s" % (_val_f1))
     
-    print('confusion: ', self._NUM_CLASSES)
+    #print('confusion: ', self._NUM_CLASSES)
     #confusion matrix
     cm = confusion_matrix(val_targ.argmax(axis=1), val_predict.argmax(axis=1))
-    print(cm)
-    names = [self._NUM_CLASSES]
-    print(list(map(names, range(self._NUM_CLASSES + 1))))
+    #print(cm)
+    #names = [self._NUM_CLASSES]
+    #print(list(map(names, range(self._NUM_CLASSES + 1))))
 
-    CustomCallback.plot_confusion_matrix(cm, list(map(names, range(self._NUM_CLASSES + 1))))
+    CustomCallback.plot_confusion_matrix(cm, self._CONFUSION_LABELS)
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
