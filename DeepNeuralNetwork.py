@@ -15,7 +15,7 @@ class DeepNeuralNetwork(CustomCallback):
 	def __init__(self, num_classes, name):
 		self._model = Sequential()
 		self._NUM_CLASSES = num_classes
-		self._CONFUSION_LABELS = "  " #to be set in specific classes
+		self._CONFUSION_LABELS = "ABCDEFGHIJKLMNOPQRSTWUXYZ" #to be set in specific classes
 		self._NAME = name
 		self.input_train, self.output_train = None, None
 		self.input_test, self.output_test = None, None
