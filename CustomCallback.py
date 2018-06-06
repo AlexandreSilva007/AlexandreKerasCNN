@@ -6,12 +6,11 @@ from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_
 
 class CustomImageAugmentationCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
-    self.symbols = ['-','\','|','/','-','\','/']
+    self.symbols = ['-','\\','|','/','-','\\','/']
     print('Começando data augmentation...')
   def on_train_end(self, logs = None):
     print('Fim da data augmentation')
   def on_epoch_begin(self, epoch, logs = None):
-    self._batch_percentage_count = 0
     print("\rComecando DA ",epoch, flush=True)
   def on_batch_begin(self, batch, logs = None):
     index = batch%7 
