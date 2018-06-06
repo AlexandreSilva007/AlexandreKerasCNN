@@ -100,6 +100,7 @@ class CustomCallback(keras.callbacks.Callback):
     plt.clf()
     ax = fig.add_subplot(111)
     ax.set_aspect(1)
+    plt.grid(False)
     res = ax.imshow(np.array(norm_conf), cmap=plt.cm.jet, 
                     interpolation='nearest')
     width, height = conf_arr.shape
