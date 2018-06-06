@@ -14,7 +14,7 @@ class CustomImageAugmentationCallback(keras.callbacks.Callback):
     print("\rComecando DA ",epoch, flush=True)
   def on_batch_begin(self, batch, logs = None):
     index = batch%7 
-    print( "\r",self.symbols[index], end="", flush=True)
+    print( "\rProcessando: ",self.symbols[index], end="", flush=True)
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
