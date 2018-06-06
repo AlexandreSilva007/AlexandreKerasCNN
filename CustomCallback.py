@@ -5,16 +5,20 @@ from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_
 
 
 class CustomImageAugmentationCallback(keras.callbacks.Callback):
+  def __init__(self, max_epochs):
+    super(CustomImageAugmentationCallback, self).__init__()
+    
   def on_train_begin(self, logs={}):
-    self.symbols = ['-','\\','|','/','-','\\','/']
+    self.symbols = ['—','\\','|','/','—','\\','/']
     print('Começando data augmentation...')
   def on_train_end(self, logs = None):
     print('Fim da data augmentation')
   def on_epoch_begin(self, epoch, logs = None):
-    print("\rComecando DA ",epoch, flush=True)
+    self.__epoch = epoch
+    print("\rComecando DA ",epoch, end="", flush=True)
   def on_batch_begin(self, batch, logs = None):
     index = batch%7 
-    print( "\rProcessando: ",self.symbols[index], end="", flush=True)
+    print( "\rProcessando época %s de %s: %s " % (self.__epoch, self.__max_epochs, self.symbols[index]), end="", flush=True)
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
