@@ -29,7 +29,7 @@ from AlexandreKerasCNN.CNN import CNN
 class ChestXRay(CNN):
 	def __init__(self, num_classes, name):
 		super(ChestXRay, self).__init__(num_classes, name)
-		self._CONFUSION_LABELS = "Pneumonia    NoPneumonia"
+		self._CONFUSION_LABELS = "PN"
 		
 	def downloadDriveZip(self, local_download_path, drive_file, file_name):
 		# 1. Authenticate and create the PyDrive client.
