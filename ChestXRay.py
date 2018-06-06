@@ -45,7 +45,7 @@ class ChestXRay(CNN):
 			print('skipping, file already exists', end="")
 		else:
 			fileId = drive.CreateFile({'id': drive_file}) #DRIVE_FILE_ID is file id example: 1iytA1n2z4go3uVCwE_vIKouTKyIDjEq
-			print('filename: ',fileId['title'])
+			#print('filename: ',fileId['title'])
 			fileId.GetContentFile(fileId['title'])
 			#print(fileId)
 			print("wait..extracting zip...")
