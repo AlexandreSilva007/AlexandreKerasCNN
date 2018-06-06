@@ -46,7 +46,7 @@ class CustomCallback(keras.callbacks.Callback):
     print ("\r f1_score: %s" % (_val_f1))
     
     #confusion matrix
-    cm = confusion_matrix(val_targ.argmax(axis=1), val_predict)
+    cm = confusion_matrix(val_targ.argmax(axis=1), val_predict.argmax(axis=1))
     CustomCallback.plot_confusion_matrix(cm, self._NUM_CLASSES)
         
     if(self._epoch_percentage_count%self._epoch_step==0):
