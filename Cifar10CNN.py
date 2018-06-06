@@ -16,6 +16,7 @@ from AlexandreKerasCNN.CNN import CNN
 class Cifar10CNN(CNN):
 	def __init__(self, num_classes, name):
 		super(Cifar10CNN, self).__init__(num_classes, name)
+		self._CONFUSION_LABELS = "ABCDEFGHIJ"
 		
 	def loadCIFAR10Data(self):
 		Cifar10CNN.__TMP_DIRECTORY = os.path.join(os.getcwd(), 'CIFAR10/saved_models')
