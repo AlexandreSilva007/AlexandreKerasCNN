@@ -52,7 +52,7 @@ class CustomCallback(keras.callbacks.Callback):
     #names = [self._NUM_CLASSES]
     #print(list(map(names, range(self._NUM_CLASSES + 1))))
 
-    CustomCallback.plot_confusion_matrix(cm, self._CONFUSION_LABELS)
+    CustomCallback.plot_confusionmatrix2(cm, self._CONFUSION_LABELS)
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
@@ -85,6 +85,35 @@ class CustomCallback(keras.callbacks.Callback):
     print('F1s: ',self.val_f1s)
     print('Recalls: ',self.val_recalls)
     print('Precisions: ',self.val_precisions)
+    
+    
+  def plot_confusionmatrix2(conf_arr, alphabet):
+    norm_conf = []
+    for i in conf_arr:
+        a = 0
+        tmp_arr = []
+        a = sum(i, 0)
+        for j in i:
+            tmp_arr.append(float(j)/float(a))
+        norm_conf.append(tmp_arr)
+    fig = plt.figure()
+    plt.clf()
+    ax = fig.add_subplot(111)
+    ax.set_aspect(1)
+    res = ax.imshow(np.array(norm_conf), cmap=plt.cm.jet, 
+                    interpolation='nearest')
+    width, height = conf_arr.shape
+    for x in xrange(width):
+        for y in xrange(height):
+            ax.annotate(str(conf_arr[x][y]), xy=(y, x), 
+                        horizontalalignment='center',
+                        verticalalignment='center')
+    cb = fig.colorbar(res)
+    plt.xticks(range(width), alphabet[:width])
+    plt.yticks(range(height), alphabet[:height])
+    #plt.show()
+
+
     
   def plot_confusion_matrix(cm, classes, normalize=False, title='Matriz de Confusão', cmap=plt.cm.Blues):
     if normalize:
