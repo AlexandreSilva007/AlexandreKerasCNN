@@ -10,7 +10,7 @@ class CustomImageAugmentationCallback(keras.callbacks.Callback):
   def on_train_end(self, logs = None):
     print('Fim da data augmentation')
   def on_epoch_begin(self, epoch, logs = None):
-    print("\rComecando DA da época ",epoch, end=" ", flush=True)
+    print("\rComecando DA da época ",epoch, ' de ', self._epochs ,end=" ", flush=True)
 
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
