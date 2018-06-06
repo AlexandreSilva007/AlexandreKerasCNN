@@ -30,7 +30,7 @@ from AlexandreKerasCNN.CustomCallback import CustomImageAugmentationCallback
 class ChestXRay(CNN):
 	def __init__(self, num_classes, name):
 		super(ChestXRay, self).__init__(num_classes, name)
-		self._CONFUSION_LABELS = "PN"
+		self._CONFUSION_LABELS = "NP"
 		
 	def downloadDriveZip(self, local_download_path, drive_file, file_name):
 		# 1. Authenticate and create the PyDrive client.
