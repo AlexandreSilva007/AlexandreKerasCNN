@@ -3,6 +3,15 @@ import matplotlib.pylab as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
 
+
+class CustomImageAugmentationCallback(keras.callbacks.Callback):
+  def on_train_begin(self, logs={}):
+    print('Começando data augmentation...')
+  def on_train_end(self, logs = None):
+    print('Fim da data augmentation')
+  def on_epoch_begin(self, epoch, logs = None):
+    print("\rComecando DA da época ",epoch, end=" ", flush=True)
+
 class CustomCallback(keras.callbacks.Callback):
   def on_train_begin(self, logs={}):
     self.hist_train = []
