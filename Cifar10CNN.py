@@ -12,6 +12,7 @@ from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, Optimi
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
 from AlexandreKerasCNN.CNN import CNN
+from AlexandreKerasCNN.CustomCallback import CustomImageAugmentationCallback
 
 class Cifar10CNN(CNN):
 	def __init__(self, num_classes, name):
