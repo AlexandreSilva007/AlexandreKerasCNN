@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_
 class CustomImageAugmentationCallback(keras.callbacks.Callback):
   def __init__(self, max_epochs):
     super(CustomImageAugmentationCallback, self).__init__()
+    self.__max_epochs = max_epochs
     
   def on_train_begin(self, logs={}):
     self.symbols = ['—','\\','|','/','—','\\','/']
