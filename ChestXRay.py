@@ -25,6 +25,7 @@ from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, Optimi
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
 from AlexandreKerasCNN.CNN import CNN
+from AlexandreKerasCNN.CustomCallback import CustomImageAugmentationCallback
 
 class ChestXRay(CNN):
 	def __init__(self, num_classes, name):
@@ -150,5 +151,6 @@ class ChestXRay(CNN):
 		# Compute quantities required for feature-wise normalization
 		# (std, mean, and principal components if ZCA whitening is applied).
 		datagen.fit(self.input_train)
+		daCallback = CustomImageAugmentationCallback()
 		# fits the model on batches with real-time data augmentation:
-		self._model.fit_generator(datagen.flow(self.input_train, self.output_train, self._batch_size), steps_per_epoch=len(self.input_train) / self._batch_size, epochs=self._epochs)
+		self._model.fit_generator(datagen.flow(self.input_train, self.output_train, self._batch_size), steps_per_epoch=len(self.input_train) / self._batch_size, epochs=self._epochs, verbose=0, callbacks=[daCallback])
