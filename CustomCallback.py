@@ -103,8 +103,8 @@ class CustomCallback(keras.callbacks.Callback):
     res = ax.imshow(np.array(norm_conf), cmap=plt.cm.jet, 
                     interpolation='nearest')
     width, height = conf_arr.shape
-    for x in xrange(width):
-        for y in xrange(height):
+    for x in range(width):
+        for y in range(height):
             ax.annotate(str(conf_arr[x][y]), xy=(y, x), 
                         horizontalalignment='center',
                         verticalalignment='center')
