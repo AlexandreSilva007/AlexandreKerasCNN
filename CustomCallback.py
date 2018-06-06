@@ -47,7 +47,7 @@ class CustomCallback(keras.callbacks.Callback):
     
     #confusion matrix
     cm = confusion_matrix(val_targ.argmax(axis=1), val_predict.argmax(axis=1))
-    CustomCallback.plot_confusion_matrix(cm, self._NUM_CLASSES)
+    CustomCallback.plot_confusion_matrix(cm, np.arange(self._NUM_CLASSES))
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\rEpoca ",epoch, "\tacc: ", logs.get('acc'), "\ttest_acc: ", logs.get('val_acc'), flush=True)#, "\terro:", logs.get('loss'))
