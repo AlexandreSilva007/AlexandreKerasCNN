@@ -164,10 +164,10 @@ class ChestXRay(CNN):
 			featurewise_std_normalization=False,  # divide inputs by std of the dataset
 			samplewise_std_normalization=True,  # divide each input by its std
 			zca_whitening=False,  # apply ZCA whitening
-			rotation_range=5,  # randomly rotate images in the range (degrees, 0 to 180)
+			rotation_range=7,  # randomly rotate images in the range (degrees, 0 to 180)
 			width_shift_range=0,  # randomly shift images horizontally (fraction of total width)
 			height_shift_range=0,  # randomly shift images vertically (fraction of total height)
-			horizontal_flip=True,  # randomly flip images
+			horizontal_flip=False,  # randomly flip images
 			vertical_flip=False)  # randomly flip images
 		# Compute quantities required for feature-wise normalization
 		# (std, mean, and principal components if ZCA whitening is applied).
