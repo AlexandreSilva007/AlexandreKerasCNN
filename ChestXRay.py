@@ -130,7 +130,7 @@ class ChestXRay(CNN):
 					count += 1
 					if(count%2==0):
 						label=1
-					else
+					else:
 						label=2
 					if (count>20): 
 						break
