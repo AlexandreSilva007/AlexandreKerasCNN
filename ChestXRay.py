@@ -77,6 +77,7 @@ class ChestXRay(CNN):
 		print('Test samples: ', self.input_test.shape[0])
 		not_hot_output_train = self.output_train
 		self.output_train = to_categorical(self.output_train, num_classes = self._NUM_CLASSES)
+		self.output_test = to_categorical(self.output_test, num_classes = self._NUM_CLASSES)
 		self.dataDistribution()
 		self.output_train = not_hot_output_train
 	
