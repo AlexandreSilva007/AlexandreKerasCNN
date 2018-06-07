@@ -74,8 +74,8 @@ class ChestXRay(CNN):
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
 		
-		self.output_train = np.reshape(self.output_train, (self.output_train.shape[0],1))
-		self.output_test = np.reshape(self.output_test, (self.output_test.shape[0],1))
+		#self.output_train = np.reshape(self.output_train, (self.output_train.shape[0],1))
+		#self.output_test = np.reshape(self.output_test, (self.output_test.shape[0],1))
 	
 		#self.dataDistribution()
 		print('Balancing...')
@@ -97,8 +97,9 @@ class ChestXRay(CNN):
 		X_trainRos, Y_trainRos = ros.fit_sample(X_trainFlat, Y_train)
 		X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
 		# Encode labels to hot vectors (ex : 2 -> [0,0,1,0,0,0,0,0,0,0])
-		Y_trainRosHot = to_categorical(Y_trainRos.ravel(), num_classes = self._NUM_CLASSES)
-		Y_testRosHot = to_categorical(Y_testRos.ravel(), num_classes = self._NUM_CLASSES)
+		print(Y_trainRos.shape)
+		Y_trainRosHot = to_categorical(Y_trainRos, num_classes = self._NUM_CLASSES)
+		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
 		# Make Data 2D again
 		for i in range(len(X_trainRos)):
 		    height, width, channels = 100,150,3
@@ -131,7 +132,7 @@ class ChestXRay(CNN):
 					if(count%2==0):
 						label=1
 					else:
-						label=2
+						label=0
 					if (count>20): 
 						break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
