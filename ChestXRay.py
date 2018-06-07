@@ -97,8 +97,8 @@ class ChestXRay(CNN):
 		X_trainRos, Y_trainRos = ros.fit_sample(X_trainFlat, Y_train)
 		X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
 		# Encode labels to hot vectors (ex : 2 -> [0,0,1,0,0,0,0,0,0,0])
-		print(Y_trainRos.shape)
-		print(Y_trainRos)
+		#print(Y_trainRos.shape)
+		#print(Y_trainRos)
 		Y_trainRosHot = to_categorical(Y_trainRos, num_classes = self._NUM_CLASSES)
 		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
 		# Make Data 2D again
@@ -118,24 +118,24 @@ class ChestXRay(CNN):
 	def get_data(self,folder):
 		X = []
 		y = []
-		count=0
+		#count=0
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = 1#[0,1]
+					label = 0#[0,1]
 				elif folderName in ['PNEUMONIA']:
-					label = 2#[1,0]
+					label = 1#[1,0]
 				else:
 					label = 0
 					print('past nao esperada')
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
-					count += 1
-					if(count%2==0):
-						label=1
-					else:
-						label=0
-					if (count>20): 
-						break
+					#count += 1
+					#if(count%2==0):
+					#	label=1
+					#else:
+					#	label=0
+					#if (count>20): 
+					#	break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
 						print('\rLoading File: ', fpath, end="")
