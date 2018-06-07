@@ -67,13 +67,11 @@ class ChestXRay(CNN):
 		self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=1)
 		self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=1)
 		
-		print('Input Train: ', self.input_train.shape)
-		print('Input Test: ', self.input_test.shape)
-		print('Out Train: ', self.output_train.shape)
-		print('Out Test: ', self.output_test.shape)
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
 		
+		print('ORIGINAL TRAINNING SAMPLES: ', self.input_train.shape[0])
+		print('Test samples: ', self.input_test.shape[0])
 		not_hot_output_train = self.output_train
 		self.output_train = to_categorical(self.output_train, num_classes = self._NUM_CLASSES)
 		self.dataDistribution()
@@ -81,6 +79,8 @@ class ChestXRay(CNN):
 	
 		print('Balancing TRAINNING data...')
 		self.balanceInputData()
+		print('BALLANCED TRAINNING SAMPLES: ', self.input_train.shape[0])
+		
 		self.dataDistribution()
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 
