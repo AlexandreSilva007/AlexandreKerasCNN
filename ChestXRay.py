@@ -79,41 +79,41 @@ class ChestXRay(CNN):
 		self.dataDistribution()
 		self.output_train = not_hot_output_train
 	
-		print('Balancing...')
-		self.balance()
+		print('Balancing INPUT data...')
+		self.balanceInputData()
 		self.dataDistribution()
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 
-	def balance(self):
+	def balanceInputData(self):
 		# Deal with imbalanced class sizes below
 		# Make Data 1D for compatability upsampling methods
 		X_trainShape = self.input_train.shape[1]*self.input_train.shape[2]*self.input_train.shape[3]
-		X_testShape = self.input_test.shape[1]*self.input_test.shape[2]*self.input_test.shape[3]
+		#X_testShape = self.input_test.shape[1]*self.input_test.shape[2]*self.input_test.shape[3]
 		X_trainFlat = self.input_train.reshape(self.input_train.shape[0], X_trainShape)
-		X_testFlat = self.input_test.reshape(self.input_test.shape[0], X_testShape)
+		#X_testFlat = self.input_test.reshape(self.input_test.shape[0], X_testShape)
 		Y_train = self.output_train
-		Y_test = self.output_test
+		#Y_test = self.output_test
 
 		ros = RandomUnderSampler(ratio='auto')
 		X_trainRos, Y_trainRos = ros.fit_sample(X_trainFlat, Y_train)
-		X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
+		#X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
 		# Encode labels to hot vectors (ex : 2 -> [0,0,1,0,0,0,0,0,0,0])
 		#print(Y_trainRos.shape)
 		#print(Y_trainRos)
 		Y_trainRosHot = to_categorical(Y_trainRos, num_classes = self._NUM_CLASSES)
-		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
+		#Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
 		# Make Data 2D again
 		for i in range(len(X_trainRos)):
 		    height, width, channels = 100,150,3
 		    X_trainRosReshaped = X_trainRos.reshape(len(X_trainRos),height,width,channels)
-		for i in range(len(X_testRos)):
-		    height, width, channels = 100,150,3
-		    X_testRosReshaped = X_testRos.reshape(len(X_testRos),height,width,channels)
+		#for i in range(len(X_testRos)):
+		    #height, width, channels = 100,150,3
+		    #X_testRosReshaped = X_testRos.reshape(len(X_testRos),height,width,channels)
 		
 		self.input_train = X_trainRosReshaped
 		self.output_train =  Y_trainRosHot
-		self.input_test = X_testRosReshaped
-		self.output_test =  Y_testRosHot
+		#self.input_test = X_testRosReshaped
+		#self.output_test =  Y_testRosHot
 		
 		
 	def get_data(self,folder):
