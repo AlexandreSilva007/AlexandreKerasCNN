@@ -63,28 +63,50 @@ class ChestXRay(CNN):
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
 		
-		#print('shape input', self.input_train.shape)
-		#print('shape output: ', self.output_train.shape)
 		self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=1)
 		self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=1)
 		
-		#self.output_train = np.expand_dims(self.output_train, axis=1)
-		#self.output_test = np.expand_dims(self.output_test, axis=1)
-		#print('new out shape: ', self.output_train.shape)
-		
-		#self.output_train = self.convertYVector2BinaryMatrix( self.output_train )
-		#self.output_test = self.convertYVector2BinaryMatrix(self.output_test )
-
 		print('Input Train: ', self.input_train.shape)
 		print('Input Test: ', self.input_test.shape)
 		print('Out Train: ', self.output_train.shape)
 		print('Out Test: ', self.output_test.shape)
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
-		self.input_train /= 255
-		self.input_test /= 255
 		self.printImageSamples(size=(12,6), columns=6,rows=3, img_data_array=self.input_train)
 		self.dataDistribution()
+		print('Balancing...')
+		self.balance()
+		self.dataDistribution()
+
+	def balance(self):
+		# Deal with imbalanced class sizes below
+		# Make Data 1D for compatability upsampling methods
+		X_trainShape = self.input_train.shape[1]*self.input_train.shape[2]*self.input_train.shape[3]
+		X_testShape = self.input_test.shape[1]*self.input_test.shape[2]*self.input_test.shape[3]
+		X_trainFlat = self.input_train.reshape(self.input_train.shape[0], X_trainShape)
+		X_testFlat = self.input_test.reshape(self.input_test.shape[0], X_testShape)
+		Y_train = self.output_train
+		Y_test = self.output_test
+
+		ros = RandomUnderSampler(ratio='auto')
+		X_trainRos, Y_trainRos = ros.fit_sample(X_trainFlat, Y_train)
+		X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
+		# Encode labels to hot vectors (ex : 2 -> [0,0,1,0,0,0,0,0,0,0])
+		Y_trainRosHot = to_categorical(Y_trainRos, num_classes = self._NUM_CLASSES)
+		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
+		# Make Data 2D again
+		for i in range(len(X_trainRos)):
+		    height, width, channels = 150,150,3
+		    X_trainRosReshaped = X_trainRos.reshape(len(X_trainRos),height,width,channels)
+		for i in range(len(X_testRos)):
+		    height, width, channels = 150,150,3
+		    X_testRosReshaped = X_testRos.reshape(len(X_testRos),height,width,channels)
+		
+		self.input_train = X_trainRosReshaped
+		self.output_train =  Y_trainRosHot
+		self.input_test = X_testRosReshaped
+		self.output_test =  Y_testRosHot
+		
 		
 	def get_data(self,folder):
 		X = []
@@ -92,11 +114,11 @@ class ChestXRay(CNN):
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
-					label = [0,1]
+					label = 1#[0,1]
 				elif folderName in ['PNEUMONIA']:
-					label = [1,0]
+					label = 2#[1,0]
 				else:
-					label = 2
+					label = 0
 					print('past nao esperada')
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
