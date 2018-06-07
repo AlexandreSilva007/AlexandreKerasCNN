@@ -74,8 +74,8 @@ class ChestXRay(CNN):
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
 		
-		self.output_train = np.reshape(self.output_train, (self.output_train.shape[0],1))
-		self.output_test = np.reshape(self.output_test, (self.output_test.shape[0],1))
+		self.output_train = np.reshape(self.output_train, (1,self.output_train.shape[0]))
+		self.output_test = np.reshape(self.output_test, (1,self.output_test.shape[0]))
 	
 		#self.dataDistribution()
 		print('Balancing...')
