@@ -74,10 +74,11 @@ class ChestXRay(CNN):
 		self.input_train = self.input_train.astype('float32')
 		self.input_test = self.input_test.astype('float32')
 		
-		#self.output_train = np.reshape(self.output_train, (self.output_train.shape[0],1))
-		#self.output_test = np.reshape(self.output_test, (self.output_test.shape[0],1))
+		not_hot_output_train = self.output_train
+		self.output_train = to_categorical(self.output_train, num_classes = self._NUM_CLASSES)
+		self.dataDistribution()
+		self.output_train = not_hot_output_train
 	
-		#self.dataDistribution()
 		print('Balancing...')
 		self.balance()
 		self.dataDistribution()
@@ -118,7 +119,7 @@ class ChestXRay(CNN):
 	def get_data(self,folder):
 		X = []
 		y = []
-		#count=0
+		count=0
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
@@ -129,13 +130,13 @@ class ChestXRay(CNN):
 					label = 0
 					print('past nao esperada')
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
-					#count += 1
-					#if(count%2==0):
-					#	label=1
-					#else:
-					#	label=0
-					#if (count>20): 
-					#	break
+					count += 1
+					if(count%3==0):
+						label=1
+					else:
+						label=0
+					if (count>20): 
+						break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
 						print('\rLoading File: ', fpath, end="")
