@@ -61,8 +61,11 @@ class ChestXRay(CNN):
 		drive_file = '1BMdv-PRDZwI91IVdHsNFuNbKX2AgDGa6'
 		file_name = 'chest_xray.zip'
 		self.downloadDriveZip(local_download_path, drive_file, file_name)
+		
+		print('Carregando e redimensionando imagens na memória...')
 		self.input_train, self.output_train = self.get_data(local_download_path+'/chest_xray/train/')
 		self.input_test, self.output_test = self.get_data(local_download_path+'/chest_xray/test/')
+		print('Imagens carregadas\r\n')
 		
 		self.input_train, self.output_train = shuffle(self.input_train, self.output_train, random_state=1)
 		self.input_test, self.output_test = shuffle(self.input_test, self.output_test, random_state=1)
