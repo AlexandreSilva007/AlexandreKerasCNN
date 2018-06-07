@@ -8,6 +8,7 @@ from PIL import Image
 import skimage
 from skimage.transform import resize
 from sklearn.utils import shuffle
+from imblearn.under_sampling import RandomUnderSampler
 
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
