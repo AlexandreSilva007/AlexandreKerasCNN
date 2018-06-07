@@ -97,10 +97,10 @@ class ChestXRay(CNN):
 		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
 		# Make Data 2D again
 		for i in range(len(X_trainRos)):
-		    height, width, channels = 150,150,3
+		    height, width, channels = 100,150,3
 		    X_trainRosReshaped = X_trainRos.reshape(len(X_trainRos),height,width,channels)
 		for i in range(len(X_testRos)):
-		    height, width, channels = 150,150,3
+		    height, width, channels = 100,150,3
 		    X_testRosReshaped = X_testRos.reshape(len(X_testRos),height,width,channels)
 		
 		self.input_train = X_trainRosReshaped
@@ -130,7 +130,7 @@ class ChestXRay(CNN):
 						img_file = np.asarray(img_file)
 						if img_file is not None:
 							img_file = skimage.transform.resize(img_file, (150, 150, 3))
-							img_file = img_file[30:130,1:150]#.crop((7, 12, 163, 138)) #crop
+							img_file = img_file[30:130,0:150]#.crop((7, 12, 163, 138)) #crop
 							X.append(img_file)
 							y.append(label)
 						else:
