@@ -94,18 +94,18 @@ class CNN(DeepNeuralNetwork):
 
   def dataDistribution(self):
     print('Distribuição dos Dados')
-    objects = np.zeros(self.output_test.shape[1])
+    objects = np.zeros(self._NUM_CLASSES)
     for i in range(0,self.output_test.shape[0]):
       out  = np.argmax(self.output_test[i])
       objects[out] += 1
     fig=plt.figure(figsize=(10,5))
     fig.add_subplot(1, 2, 1)
-    for i in range(0,self.output_test.shape[1]):
+    for i in range(0,self._NUM_CLASSES):
       plt.bar(i, objects[i], 0.8)
       plt.xlabel('Classes')
       plt.ylabel('Elementos')
     fig.add_subplot(1, 2, 2)
-    for i in range(0,self.output_test.shape[1]):
+    for i in range(0,self._NUM_CLASSES):
       plt.pie(objects )
       plt.xlabel('Classes x Elementos')
     plt.show()
