@@ -128,7 +128,7 @@ class ChestXRay(CNN):
 					print('past nao esperada')
 				for image_filename in (os.listdir(folder + folderName)):#tdqm
 					count += 1
-					if (count>20): 
+					if (count>100): 
 						break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
