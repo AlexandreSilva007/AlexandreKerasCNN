@@ -61,7 +61,7 @@ class CustomCallback(keras.callbacks.Callback):
     self.val_recalls.append(_val_recall)
     self.val_precisions.append(_val_precision)
     #print ("\r val_f1: %s val_precision: %s val_recall %s" %(_val_f1, _val_precision, _val_recall))
-    print ("\r f1_score: %s" % (_val_f1))
+    print ("\r f1_score: %s" % (_val_f1), end="\t")
         
     if(self._epoch_percentage_count%self._epoch_step==0):
       print("\r\n******************** RESULTADO PARCIAL ***********************")
