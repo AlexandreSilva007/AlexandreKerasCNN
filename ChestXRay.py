@@ -98,6 +98,7 @@ class ChestXRay(CNN):
 		X_testRos, Y_testRos = ros.fit_sample(X_testFlat, Y_test)
 		# Encode labels to hot vectors (ex : 2 -> [0,0,1,0,0,0,0,0,0,0])
 		print(Y_trainRos.shape)
+		print(Y_trainRos)
 		Y_trainRosHot = to_categorical(Y_trainRos, num_classes = self._NUM_CLASSES)
 		Y_testRosHot = to_categorical(Y_testRos, num_classes = self._NUM_CLASSES)
 		# Make Data 2D again
