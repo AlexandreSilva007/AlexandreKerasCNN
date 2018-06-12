@@ -10,13 +10,6 @@ from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, Optimi
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.CNN import CNN
 
-def addInceptionLayer(self, inceptionlayer):
-	self._model.add(inceptionlayer.concatenateLayers())
-
-def createInception(self):
-	return Inception(self)
-
-	
 class Inception():
 	
 	def __init__(self, model):
