@@ -8,7 +8,6 @@ from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, Cropping2D
 
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
-from AlexandreKerasCNN.CNN import CNN
 
 class Inception():
 	
