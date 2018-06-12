@@ -11,6 +11,7 @@ from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, Cropping2D
 from AlexandreKerasCNN.Functions import ActivationFunction, LossFunction, OptimizerFunction
 from AlexandreKerasCNN.Kernel import Kernel
 from AlexandreKerasCNN.DeepNeuralNetwork import DeepNeuralNetwork
+from AlexandreKerasCNN.Inception import Inception
 #from sklearn.utils import shuffle
 
 class CNN(DeepNeuralNetwork):
@@ -60,6 +61,12 @@ class CNN(DeepNeuralNetwork):
     
   def addCropLayer(self, top=0,left=0, bottom=0, right=0):
     self._model.add(Cropping2D(cropping=((top,left), (bottom,right))))
+    
+  def addInceptionLayer(self, inceptionlayer):
+    self._model.add(inceptionlayer.concatenateLayers())
+
+  def createInception(self):
+    return Inception(self)
     
   def printImageSamples(self, img_data_array, size=(10,5),columns=8,rows=4):
     if(len(self._model.layers)>0):
