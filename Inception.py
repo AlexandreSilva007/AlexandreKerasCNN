@@ -21,7 +21,7 @@ class Inception():
 		self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
   
 	def add2DMaxPoolingLayer(self, size):
-		self.operatons.append(MaxPooling2D(pool_size=size, padding='same'))
+		self.operations.append(MaxPooling2D(pool_size=size, padding='same'))
     
 	def add2DAveragePoolingLayer(self, size):
 		self.operations.append(AveragePooling2D(pool_size=size, padding='same'))
