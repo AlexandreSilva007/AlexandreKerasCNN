@@ -24,8 +24,8 @@ class Inception():
 			print(self.model.input_train.shape[1:])
 			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
 		else:
-			print(self.operations[len(self.operations)-1].shape)
-			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.operations[len(self.operations)-1].shape))
+			print(self.operations[len(self.operations)-1])
+			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same')  (self.operations[len(self.operations)-1])   )
 		#tis = tf.convert_to_tensor(self.model.input_train.shape[1:])
 		#print('tis: ', tis)
 		#self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=tis.shape) )
