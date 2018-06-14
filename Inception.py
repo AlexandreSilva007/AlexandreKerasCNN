@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential
