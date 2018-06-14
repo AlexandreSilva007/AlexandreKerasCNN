@@ -139,7 +139,7 @@ class ChestXRay(CNN):
 						label=1
 					else:
 						label=0
-					if (count>20): 
+					if (count>50): 
 						break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
