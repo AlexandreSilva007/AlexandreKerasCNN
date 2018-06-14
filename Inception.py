@@ -18,7 +18,8 @@ class Inception():
 	def add2DConvolutionLayer(self, num_kernels, kernel):
 		if((not hasattr(self.model, 'input_train')) or (self.model.input_train is None)):
 			raise ValueError('Carregue os dados de entrada primeiro! Sem input_shape')
-		self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
+		#self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
+		self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same')(self.model.input_train.shape[1:])
   
 	def add2DMaxPoolingLayer(self, size):
 		self.operations.append(MaxPooling2D(pool_size=size, padding='same'))
