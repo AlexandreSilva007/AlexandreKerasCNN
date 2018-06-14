@@ -21,8 +21,10 @@ class Inception():
 			raise ValueError('Carregue os dados de entrada primeiro! Sem input_shape')
 			
 		if not self.operations:
+			print(self.model.input_train.shape[1:])
 			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
 		else:
+			print(self.operations[len(self.operations)-1].shape)
 			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.operations[len(self.operations)-1].shape))
 		#tis = tf.convert_to_tensor(self.model.input_train.shape[1:])
 		#print('tis: ', tis)
