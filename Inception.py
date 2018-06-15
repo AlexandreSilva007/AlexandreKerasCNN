@@ -21,7 +21,7 @@ class Inception():
 		if((not hasattr(self.model, 'input_train')) or (self.model.input_train is None)):
 			raise ValueError('Carregue os dados de entrada primeiro! Sem input_shape')
 			
-		if not self.last_layer:
+		if self.last_layer is None:
 			input_obj = Input(shape = self.model.input_train.shape[1:])
 			self.last_layer = Conv2D(num_kernels, kernel.size,  padding='same')(input_obj)
 		else:
