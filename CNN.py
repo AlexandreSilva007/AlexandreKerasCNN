@@ -44,26 +44,14 @@ class CNN(DeepNeuralNetwork):
     self._model.fit_generator(datagen.flow(self.input_train, self.output_train, self._batch_size), steps_per_epoch=len(self.input_train) / self._batch_size, epochs=self._epochs)
   
   #number of filters (int), kernel object, input shape = shape
-  def add2DConvolutionLayer(self, num_kernels, kernel, inceptionTensor = None):
+  def add2DConvolutionLayer(self, num_kernels, kernel):
     if((not hasattr(self, 'input_train')) or (self.input_train is None)):
       raise ValueError('Carregue os dados de entrada primeiro! Sem input_shape')
-    
-    if inceptionTensor is None:
-        self._model.add(Conv2D(num_kernels, kernel.size, padding=kernel.padding, input_shape=self.input_train.shape[1:]))
-    else:
-        r = inceptionTensor.concatenateLayers()
-        nl = Conv2D(num_kernels, kernel.size, padding=kernel.padding)(r)
-        print(nl)
-        self._model.add(nl)
+    self._model.add(Conv2D(num_kernels, kernel.size, padding=kernel.padding, input_shape=self.input_train.shape[1:]))
     self._model.add( ActivationFunction.ReLU() )
-
     
-  def add2DMaxPoolingLayer(self, size, inceptionTensor = None):
-        if inceptionTensor is None:
-            self._model.add(MaxPooling2D(pool_size=size))
-        else:
-            r = inceptionTensor.concatenateLayers()
-            self._model.add( MaxPooling2D(pool_size=size)(r) )
+  def add2DMaxPoolingLayer(self, size):
+    self._model.add(MaxPooling2D(pool_size=size))
     
   def add2DAveragePoolingLayer(self, size):
     self._model.add(AveragePooling2D(pool_size=size))
