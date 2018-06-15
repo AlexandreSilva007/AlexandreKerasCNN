@@ -54,7 +54,8 @@ class CNN(DeepNeuralNetwork):
         if inceptionTensor is None:
             self._model.add(MaxPooling2D(pool_size=size))
         else:
-            self._model.add( MaxPooling2D(pool_size=size) (inceptionTensor.last_layer) )
+            r = inceptionTensor.concatenateLayers()
+            self._model.add( MaxPooling2D(pool_size=size)(r) )
     
   def add2DAveragePoolingLayer(self, size):
     self._model.add(AveragePooling2D(pool_size=size))
