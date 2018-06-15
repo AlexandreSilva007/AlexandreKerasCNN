@@ -52,7 +52,9 @@ class CNN(DeepNeuralNetwork):
         self._model.add(Conv2D(num_kernels, kernel.size, padding=kernel.padding, input_shape=self.input_train.shape[1:]))
     else:
         r = inceptionTensor.concatenateLayers()
-        self._model.add(Conv2D(num_kernels, kernel.size, padding=kernel.padding)(r) )
+        nl = Conv2D(num_kernels, kernel.size, padding=kernel.padding)(r)
+        print(nl)
+        self._model.add(nl)
     self._model.add( ActivationFunction.ReLU() )
 
     
