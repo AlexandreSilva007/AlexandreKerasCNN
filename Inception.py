@@ -3,7 +3,7 @@ import tensorflow as tf
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten, Concatenate
+from keras.layers import Dense, Dropout, Activation, Flatten, Concatenate, Input
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, Cropping2D
 
@@ -15,22 +15,21 @@ class Inception():
 	def __init__(self, model):
 		self.operations = []
 		self.model = model
+		self.last_layer = None
 	
 	def add2DConvolutionLayer(self, num_kernels, kernel):
 		if((not hasattr(self.model, 'input_train')) or (self.model.input_train is None)):
 			raise ValueError('Carregue os dados de entrada primeiro! Sem input_shape')
 			
-		if not self.operations:
-			print(self.model.input_train.shape[1:])
-			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=self.model.input_train.shape[1:]))
+		if not self.last_layer:
+			input_obj = Input(shape = self.model.input_train.shape[1:])
+			self.last_layer = Conv2D(num_kernels, kernel.size,  padding='same')(input_obj)
 		else:
-			print(self.operations[len(self.operations)-1].input_shape)
-			print(self.operations[len(self.operations)-1].batch_input_shape )
-			self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same')  (self.operations[len(self.operations)-1])   )
-		#tis = tf.convert_to_tensor(self.model.input_train.shape[1:])
-		#print('tis: ', tis)
-		#self.operations.append(Conv2D(num_kernels, kernel.size,  padding='same', input_shape=tis.shape) )
+			self.last_layer = Conv2D(num_kernels, kernel.size,  padding='same')(self.last_layer)  
+			
+		self.operations.append(self.last_layer)
   
+
 	def add2DMaxPoolingLayer(self, size):
 		self.operations.append(MaxPooling2D(pool_size=size, padding='same'))
     
