@@ -50,8 +50,11 @@ class CNN(DeepNeuralNetwork):
     self._model.add(Conv2D(num_kernels, kernel.size, padding=kernel.padding, input_shape=self.input_train.shape[1:]))
     self._model.add( ActivationFunction.ReLU() )
   
-  def add2DMaxPoolingLayer(self, size):
-    self._model.add(MaxPooling2D(pool_size=size))
+  def add2DMaxPoolingLayer(self, size, inceptionTensor = None):
+        if inceptionTensor is None:
+            self._model.add(MaxPooling2D(pool_size=size))
+        else:
+            self._model.add( MaxPooling2D(pool_size=size) (inceptionTensor.last_layer) )
     
   def add2DAveragePoolingLayer(self, size):
     self._model.add(AveragePooling2D(pool_size=size))
