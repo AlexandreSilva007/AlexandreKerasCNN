@@ -37,4 +37,5 @@ class Inception():
 		self.operations.append(AveragePooling2D(pool_size=size, padding='same'))
     
 	def concatenateLayers(self):
+		print(self.operations)
 		return keras.layers.concatenate(self.operations, axis = 3)
