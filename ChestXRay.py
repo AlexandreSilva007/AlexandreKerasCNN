@@ -123,7 +123,7 @@ class ChestXRay(CNN):
 	def get_data(self,folder):
 		X = []
 		y = []
-		count=0
+		#count=0
 		for folderName in os.listdir(folder):
 			if not folderName.startswith('.'):
 				if folderName in ['NORMAL']:
@@ -134,13 +134,13 @@ class ChestXRay(CNN):
 					label = 0
 					print('past nao esperada')
 				for image_filename in (os.listdir(folder + folderName)):
-					count += 1
-					if(count%3==0):
-						label=1
-					else:
-						label=0
-					if (count>50): 
-						break
+					#count += 1
+					#if(count%3==0):
+					#	label=1
+					#else:
+					#	label=0
+					#if (count>50): 
+					#	break
 					if( (os.path.splitext(image_filename.upper())[1] == '.JPG') or (os.path.splitext(image_filename.upper())[1] == '.JPEG') ):
 						fpath = folder + folderName + '/' + image_filename
 						print('\rLoading File: ', fpath, end="")
